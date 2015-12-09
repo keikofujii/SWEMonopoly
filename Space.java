@@ -5,10 +5,8 @@ public abstract class Space {
 	 * row
 	 * column
 	 */
-	public boolean performAction()
-	{
-		return true;
-	}
+	
+	public abstract boolean performAction();
 	
 	private int row;
 	private int column;
