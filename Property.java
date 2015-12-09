@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * Created by Jack on 11/12/2015.
@@ -18,6 +19,7 @@ public class Property Extends Space {
    private int propertyPrice;
    private List<PropertyItem> _propertyList;
    private int _rent;
+   private String purchaseProperty;
 
 
    // constructor
@@ -52,6 +54,20 @@ public class Property Extends Space {
       return this.propertyPrice;
    }
 
+   public String getColor(){
+      return color;
+   }
+
+   public Player getOwner(){
+      return owner;
+   }
+
+   public int getPrice(){
+      return Price;
+   }
+
+
+
 
    float getRent() {
       // first we interact with the base class to determine what factors determine the rent
@@ -59,7 +75,8 @@ public class Property Extends Space {
       float finalRent = 0;
       float houseRent;
       float hotelRent;
-      boolean allOwnedSamePlayer = super.CommonOwnership(this.name, this.owner);
+      boolean hasMonopoly = getOwner().hasMonopoly(this);
+      //boolean allOwnedSamePlayer = super.CommonOwnership(this.name, this.owner);
 
       // here is where we initially calculate finalRent based on home/hotel counts
       if (houseCount > 0){
@@ -78,7 +95,26 @@ public class Property Extends Space {
       }
 
       return finalRent;
-}
+   }
+
+   public performAction(){
+      if (getOwner() == null){
+        Scanner input = new Scanner(System.in);
+         purchaseProperty = input.next();
+         if (purchaseProperty == "Y"){
+            Board.getBoard().getCurrentPlayer().chargePlayer(getPrice());
+            Board.getBoard().getCurrentPlayer().addProperty();
+            setOwner(Board.getBoard().getCurrentPlayer());
+         }
+         else {
+            Bank.auction(this);
+         }
+      }
+      else {
+         .chargeMoney(getRent());
+         getOwner().addMoney(getRent());
+      }
+   }
 
    private void initialize() {
       PropertyItem propertyItem;
@@ -261,13 +297,13 @@ public class Property Extends Space {
    }
 
 
-   Player getOwner() {
-      return this.owner;
-   }
+   //Player getOwner() {
+      //return this.owner;
+   //}
 
-   void setOwner(Player player) {
-      this.owner = player;
-   }
+   //void setOwner(Player player) {
+     // this.owner = player;
+   //}
 
 
 }
