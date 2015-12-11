@@ -1,13 +1,13 @@
 
 public abstract class Space {
-	/*
-	 * Attributes:
-	 * row
-	 * column
-	 */
-	
-	public abstract boolean performAction();
-	
-	private int row;
-	private int column;
+    
+    /**
+     * A method to perform an action when the player lands on a space
+     *
+     * @return if the action was performed
+     */
+    public abstract boolean performAction();
+    
+    private int row;
+    private int column;
 }
