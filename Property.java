@@ -4,6 +4,8 @@ import java.util.Scanner;
 import Board;
 
 /**
+ *
+ * @author Jack Tillotson
  * Created by Jack on 11/12/2015.
  */
 public class Property extends Space {
@@ -21,7 +23,13 @@ public class Property extends Space {
    private int _rent;
    private String purchaseProperty;
 
-
+    /**
+     *
+     * @param name
+     * @param color
+     * @param rent
+     * @param price
+     */
    // constructor
    public Property(String name, String color, int rent, int price) {
       _name = name;
@@ -30,35 +38,68 @@ public class Property extends Space {
       _propertyPrice = price;
    }
 
+    /**
+     *
+     * @return [returns the name of the property]
+     */
    // properties
    String getName() {
       return _name;
    }
 
+    /**
+     *
+     * @return [returns the price of a house]
+     */
    int getHousePrice() {
       return housePrice;
    }
 
+    /**
+     *
+     * @return [returns the price of a hotel]
+     */
    int getHotelPrice() {
       return hotelPrice;
    }
 
+    /**
+     *
+     * @return [returns the price of the property]
+     */
    int getPropertyPrice() {
       return _propertyPrice;
    }
 
+    /**
+     *
+     * @return [returns the color of the property]
+     */
    public String getColor(){
       return _color;
    }
 
+    /**
+     *
+     * @return [returns the owner of the property]
+     */
    public Player getOwner(){
       return owner;
    }
 
+    /**
+     *
+     * @return [returns the price of the property]
+     */
    public int getPrice(){
       return _propertyPrice;
    }
 
+    /**
+     *
+     * @return [returns the amount of rent a player pays when landing on a property
+     * after calculations]
+     */
    public float getRent() {
       // first we interact with the base class to determine what factors determine the rent
       // e.g. ownership of sister properties
@@ -87,8 +128,14 @@ public class Property extends Space {
       return finalRent;
    }
 
+    /**
+     *
+     * @return [returns that the action took place.  The action is either charging them for the property
+     * and adding it to their properties or auctioning the property or charging them rent]
+     */
 	@Override
 	public boolean performAction() {
+        // check to see if anyone owns the property, if not then ask them to purchase
 		if (getOwner() == null){
 	        Scanner input = new Scanner(System.in);
 	         purchaseProperty = input.next();
@@ -108,10 +155,11 @@ public class Property extends Space {
 		return true;
 	}
 
-   public Player getOwner() {
-      return owner;
-   }
 
+    /**
+     *
+     * @param player
+     */
    public void setOwner(Player player) {
      owner = player;
    }
