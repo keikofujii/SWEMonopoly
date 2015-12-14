@@ -1,15 +1,24 @@
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Set;
 
 public class Bank
 {
-    private HashMap<Property, bankProterties> _proterties;
+    private Set<Property, bankProterties> _proterties;
     
+    /**
+     * This method consturst the Bank
+     */
     public Bank()
     {
         _proterties = new HashMap<Property, bankProterties>;
     }
     
+    /**
+     * This method sells a property to the player if they have enough money
+     * @param soldProperty This is the property to be sold
+     * @param currentPlayer This is the player who wants to buy the player
+     * @return true if successful or false if they don't have enough money or it is already sold
+     */
     public boolean sellProperty(Property soldProperty, Player currentPlayer)
     {
         // assume that the player has enough money
@@ -36,10 +45,10 @@ public class Bank
      * This method gives the player new building and
      * removes the the price of that building from the player's cash supply
      *
-     * @param playersProperty
-     * @param currentPlayer
-     * @param buildingToBeSold
-     * @return if successful
+     * @param playersProperty This the property that the building will be put on
+     * @param currentPlayer This is the player who is buying the building
+     * @param buildingToBeSold This is the building that will be sold
+     * @returns true if successful else false if the player doesn't have enough money
      */
     public boolean sellBuilding(Property playersProperty, Player currentPlayer, Building buildingToBeSold)
     {
@@ -66,6 +75,14 @@ public class Bank
     } // sellBuilding
     
     
+    /**
+     * This method sells a property to whoever has the highest bid.  This is done through
+     * a bind auction where no one else gets to see what another person put up for a bid.
+     *
+     * @param propertyToBeSold  This is the preperty that the players are trying to buy
+     * @param theBoard Needed to get access to all of the players at once
+     * @return true if the property is sold else false
+     */
     public boolean auction(Property propertyToBeSold, Board theBoard)
     {
         // get an arraylist of players from the baord
@@ -89,6 +106,15 @@ public class Bank
     } // auction
     
     
+    /**
+     * This method is the bank buying a building from the player and giving them cash for it.
+     * The amount of cash is half of what was paid for the building
+     *
+     * @param playersProperty This is protery that has the building
+     * @param currentPlayer This is the player who is selling the building back to the bank
+     * @param buildingToBeSold this is the building that will be sold
+     * @return true if sold, else the player didn't have a building to sell
+     */
     public boolean buyBuilding(Property playersProperty, Player currentPlayer, building buildingToBeSold)
     {
         // get the building type
@@ -99,10 +125,4 @@ public class Bank
         currentPlayer.removeBuilding()
         
     } // buyBuilding
-    
-    public boolean addBuilding(Property newProperty)
-    {
-        
-    }
-    
-}
+} // Bank
